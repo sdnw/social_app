@@ -15,3 +15,4 @@ u3 = User.create!(username: "richie")
 u1.posts.create!(text: "Hello world!")
 u2.posts.create!(text: "Deadlock")
 u3.posts.create!(text: "strokin my shi")
+

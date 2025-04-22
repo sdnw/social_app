@@ -1,12 +1,21 @@
-<div id="<%= dom_id post %>">
-  <p>
-    <strong>Text:</strong>
-    <%= post.text %>
-  </p>
+<div class="post">
+  <p><%= post.text %></p>
 
-  <p>
-    <strong>User:</strong>
-    <%= post.user_id %>
-  </p>
+  <!-- show like count -->
+  <p>👍 Likes: <%= post.likes.count %></p>
 
+  <% if current_user %>
+  <% puts current_user.username %>
+    <% if post.likes.exists?(user_id: current_user.id) %>
+      <%= button_to "Unlike", post_like_path(post, post.likes.find_by(user: current_user)),
+                    method: :delete,
+                    class: "btn btn-sm btn-danger" %>
+    <% else %>
+      <%= button_to "Like", post_likes_path(post),
+                    method: :post,
+                    class: "btn btn-sm btn-primary" %>
+    <% end %>
+  <% else %>
+    <%= link_to "Log in to like", new_user_session_path %>
+  <% end %>
 </div>
